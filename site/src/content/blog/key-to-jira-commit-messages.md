@@ -7,7 +7,7 @@ tags: ["git", "bash", "jira", "regex"]
 
 Are you bored of typing things? Do you enjoy automation? Do you always have to check on your current ticket's key for your commit message? Well have I got a present for you 🎁
 
-# Introducing Git Hooks
+## Introducing Git Hooks
 
 > Hooks are programs you can place in a git repo's hooks directory to trigger actions at certain points in git’s execution
 
@@ -15,7 +15,7 @@ You can write code to help you write code ( and if you’re writing tests then y
 
 We’re going to be looking at the `prepare-commit-msg` hook which you might have guessed helps you prepare you commit messages.
 
-# Commit Message
+## Commit Message
 
 `prepare-commit-msg`
 
@@ -49,7 +49,7 @@ The hash bang `#!/bin/bash` at the top of the script can be subbed out for any o
 
 **Keen to learn more about what we just covered? 👇**
 
-## Prepare Commit Message
+### Prepare Commit Message
 
 _prepare-commit-msg_ docs: [https://git-scm.com/docs/githooks#_prepare_commit_msg](https://git-scm.com/docs/githooks#_prepare_commit_msg "https://git-scm.com/docs/githooks#_prepare_commit_msg")
 
@@ -57,7 +57,7 @@ The way we actually modify the message only actually happens on the last line wh
 
 **So we’re about to get all the repo branches and extract a Jira issue key if the current branch contains a valid Jira issues key  from the branch name before we pop it in the commit message**
 
-### Git Branch
+#### Git Branch
 
 Now onto the fun. Using `/dev/null` is like setting up email rules. I love them but misuse it and you can miss some important stuff. Trust me on this one now …. _THROW CAUTION TO THE WIND_ … We’re going to yeet that `stderr` output straight into the void.
 
@@ -67,19 +67,19 @@ $COMMAND 2>/dev/null
 
 This is going to let you ignore those pesky errors. It feels good not to care right?? 🤨​ this is technically not necessary but helps when testing out the script outside of the a git repo as you can avoid the `fatal: not a git repository (or any of the parent directories): .git` message you’ll get. Don’t worry, this will end up failing the script anyway due to the absence of branches so this error skipping isn’t so bad but feel free to remove the `2>/dev/null` if you’re worried.
 
-### He sed she sed by the stream shore
+#### He sed she sed by the stream shore
 
 Sed (**S**tream **Ed**itor) helps us weed out what we don’t need from the output we do. If you think it looks like gibberish don’t worry. It Is!! but so is latin and they still teach that so 🤷‍♂️.
 
 To break it down quickly it consists of the command `sed` the flags `-nE` and the regex expression `s/^\* ([A-Z]{2,}-[0-9]+).*$/\1 /p`
 
-#### Flags
+##### Flags
 
 `-n` _“suppress automatic printing of pattern space”_ **Don’t print anything out at the end**
 
 `-E` _“use extended regular expressions”_ **I wanna use that** _**fancy**_ **regex**
 
-#### Regex
+##### Regex
 
 Basic format of replacement regex is `s/find/replace/`
 
@@ -99,7 +99,7 @@ We need to match the entire line so that the replace removes everything we don�
 
 `p` this tells us to print out each line that matches the _find_ portion of our sed
 
-#### To put all that together
+##### To put all that together
 
 We want to (by default) suppress output to ignore other branches. Sed will run on each line of stdin which will be every branch available locally (which can get pretty big sometimes) so we don’t want it to printout out anything unless it matches exactly what we want. We want to run it with extended regex to we can use the fancy `{2,}` which is a nice way of saying two or more but wasn’t introduced initially.
 
