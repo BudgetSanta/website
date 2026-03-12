@@ -9,18 +9,35 @@ Personal technical blog built with [Astro](https://astro.build) and deployed to
 .
 ├── .github/
 │   └── workflows/
-│       └── deploy.yml   ← GitHub Actions workflow (build + deploy)
-├── site/                ← Astro project (config, layouts, pages)
+│       └── deploy.yml        ← GitHub Actions workflow (build + deploy)
+├── site/                     ← Astro project (config, layouts, pages)
 │   ├── astro.config.mjs
 │   ├── package.json
 │   ├── src/
 │   │   ├── content/
-│   │   │   └── blog/    ← Markdown posts live here
-│   │   ├── layouts/
+│   │   │   └── blog/         ← ✏️  YOUR POSTS GO HERE (.md files)
+│   │   ├── content.config.ts ← content schema (don't edit unless adding fields)
+│   │   ├── layouts/          ← shared HTML shells (don't edit for new posts)
 │   │   └── pages/
+│   │       └── blog/         ← routing code (don't edit for new posts)
 │   └── public/
 └── README.md
 ```
+
+### `content/blog/` vs `pages/blog/` — what's the difference?
+
+These two folders sound similar but serve completely different purposes:
+
+| Folder | What it is | Who edits it |
+|---|---|---|
+| `site/src/content/blog/` | Your **Markdown posts** — the actual text, code, and images that make up each article | **You**, every time you write a new post |
+| `site/src/pages/blog/` | Astro **routing code** — the templates that read your Markdown files and turn them into HTML pages | Only when changing how posts are displayed (layout, metadata shown, etc.) |
+
+**In practice:**
+- To write a new post → add a `.md` file to `site/src/content/blog/`. Done.
+- `site/src/pages/blog/` contains two files you can mostly ignore:
+  - `index.astro` — renders the `/blog` listing page (reads all posts from `content/blog/`)
+  - `[...slug].astro` — renders each individual post page (e.g. `/blog/my-post`)
 
 ## Writing a post
 
