@@ -1,0 +1,19 @@
+# Astro build output
+site/dist/
+
+# Node dependencies
+site/node_modules/
+
+# Astro type generation
+site/.astro/
+
+# Environment / local config
+.env
+.env.local
+.env.*.local
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
