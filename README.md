@@ -61,13 +61,53 @@ The post will be available at `/blog/my-first-post`.
 
 ## Local development
 
+### Prerequisites
+
+- **Node.js 18 or later** — [download from nodejs.org](https://nodejs.org/).  
+  Verify you have it: `node --version` (should print `v18.x.x` or higher).
+- **npm** — bundled with Node, no separate install needed.
+
+### First-time setup
+
 ```bash
+# 1. Clone the repo (skip if you already have it)
+git clone https://github.com/BudgetSanta/website.git
+cd website
+
+# 2. Install dependencies
 cd site
 npm install
-npm run dev        # starts the dev server at http://localhost:4321
-npm run build      # builds to site/dist/
-npm run preview    # previews the production build locally
 ```
+
+### Day-to-day: hot-reload dev server
+
+```bash
+cd site
+npm run dev
+```
+
+- Opens a dev server at **http://localhost:4321**.
+- Every time you save a file — Markdown post, layout, style — the browser
+  refreshes automatically.
+- This is what you'll use 99% of the time while writing or editing.
+
+### Before you merge: preview the production build
+
+The dev server skips some optimisations. To see exactly what GitHub Pages will
+serve, do a full production build and preview it locally:
+
+```bash
+cd site
+npm run build      # compiles everything to site/dist/
+npm run preview    # serves site/dist/ at http://localhost:4321
+```
+
+Open **http://localhost:4321** and click around — if it looks right here, it
+will look right after merging and deploying.
+
+> **Tip:** `npm run build` will also catch any type errors or broken imports
+> that the dev server sometimes overlooks, so it's a good final sanity-check
+> before opening a PR.
 
 ## Deployment
 
