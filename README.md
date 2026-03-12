@@ -1,4 +1,4 @@
-# website
+# Website
 
 Personal technical blog built with [Astro](https://astro.build), deployed to GitHub Pages via GitHub Actions.
 
@@ -32,3 +32,4 @@ To preview the production build before merging:
 ```bash
 npm run build && npm run preview
 ```
+
