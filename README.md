@@ -2,6 +2,8 @@
 
 Personal technical blog built with [Astro](https://astro.build), deployed to GitHub Pages via GitHub Actions.
 
+Live at [jaredsteiner.com](https://jaredsteiner.com).
+
 ## Writing a post
 
 Add a `.md` file to `site/src/content/blog/`:
